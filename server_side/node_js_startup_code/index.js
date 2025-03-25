@@ -13,9 +13,13 @@ const db = mongoose.connection;
 db.on('error', (error) => console.error(error));
 db.once('open', () => console.log('Connected to Database'));
 
-app.post('/:id', (req, res) => {
+app.delete('/:id', async (req, res) => {
   const id = req.params.id;
-  console.log(id);   
+// Update a document by 
+await User.findByIdAndDelete(id);
+
+  res.json("Deleted Successful");
+
 });
 
 
@@ -31,4 +35,5 @@ name: String,
 age: Number,
 email: String
 });
+
 const User = model('User', userSchema);
